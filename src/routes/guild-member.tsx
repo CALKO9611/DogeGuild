@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
-interface MemberInfo {
-  name: string;
-  nickname: string;
-  level: string;
-  job: string;
-  characterImageUrl: string;
-}
+import CharacterBox from "../components/characterBox";
 
 const Wrapper = styled.div`
   /* background-color: yellow; */
@@ -20,24 +13,14 @@ const Wrapper = styled.div`
   /* grid-gap: 20px; */
 `;
 
-const CharacterBox = styled.div`
-  /* background-color: yellow; */
-  display: flex;
-  border: 1px solid;
-  align-items: center;
-  justify-content: center;
-`;
-
 export default function GuildMember() {
   const [isLoading, setLoading] = useState(true);
-  const [membersInfo, setMembersInfo] = useState<MemberInfo[]>([]);
+  const [membersInfo, setMembersInfo] = useState([]);
 
   useEffect(() => {
     const fetchMembersInfo = async () => {
       try {
-        const response = await axios.get<MemberInfo[]>(
-          "http://localhost:5174/guild-member"
-        ); // server.js 포트번호
+        const response = await axios.get("http://localhost:5174/guild-member"); // server.js 포트번호
         setLoading(false);
         setMembersInfo(response.data);
       } catch (error) {
@@ -56,19 +39,7 @@ export default function GuildMember() {
         <p>Loading...</p>
       ) : (
         membersInfo.map((memberInfo, index) => (
-          <CharacterBox key={index}>
-            <img
-              src={memberInfo.characterImageUrl}
-              alt={`${memberInfo.name}의 캐릭터 이미지`}
-            />
-            <div>
-              <p>{memberInfo.name}</p>
-              {index === 0 && <p>길드마스터</p>}
-              <p>{memberInfo.nickname}</p>
-              <p>{memberInfo.level}</p>
-              <p>{memberInfo.job}</p>
-            </div>
-          </CharacterBox>
+          <CharacterBox key={index} index={index} memberInfo={memberInfo} />
         ))
       )}
     </Wrapper>

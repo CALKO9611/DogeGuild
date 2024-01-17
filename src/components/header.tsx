@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
@@ -9,7 +9,6 @@ const StyledHeader = styled.header`
   gap: 30px;
   background-color: #ffb700;
 
-  h1,
   img {
     cursor: pointer;
   }
@@ -20,25 +19,35 @@ const StyledHeader = styled.header`
   }
 `;
 
+const StyledNav = styled.nav`
+  display: flex;
+  gap: 30px;
+`;
+
 export default function Header() {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
-
+  const linkStyle = { textDecoration: "none", color: "black" };
   return (
     <StyledHeader>
-      <img
-        width="70px"
-        height="61px"
-        src="/public/kodakLogo.svg"
-        alt="Kodak 로고 이미지"
-        onClick={() => handleNavigation("/")}
-      />
-      <h1 onClick={() => handleNavigation("/")}>홈</h1>
-      <h1 onClick={() => handleNavigation("/guild-member")}>길드원</h1>
-      <h1 onClick={() => handleNavigation("/developer")}>개발자</h1>
+      <Link to="/">
+        <img
+          width="70px"
+          height="61px"
+          src="/public/kodakLogo.svg"
+          alt="Kodak 로고 이미지"
+        />
+      </Link>
+
+      <StyledNav>
+        <Link to="/" style={linkStyle}>
+          홈
+        </Link>
+        <Link to="/guild-member" style={linkStyle}>
+          길드원
+        </Link>
+        <Link to="/developer" style={linkStyle}>
+          개발자
+        </Link>
+      </StyledNav>
     </StyledHeader>
   );
 }

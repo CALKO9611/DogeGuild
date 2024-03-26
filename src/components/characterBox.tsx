@@ -2,13 +2,11 @@ import styled from "styled-components";
 
 interface CharacterBoxProps {
   memberInfo: {
-    name: string;
-    nickname: string;
-    level: string;
-    job: string;
-    characterImageUrl: string;
+    character_name: string;
+    character_level: number;
+    character_class: string;
+    character_image: string;
   };
-  index: number;
 }
 
 const CharacterBoxContainer = styled.div`
@@ -18,19 +16,17 @@ const CharacterBoxContainer = styled.div`
   justify-content: center;
 `;
 
-export default function CharacterBox({ memberInfo, index }: CharacterBoxProps) {
+export default function CharacterBox({ memberInfo }: CharacterBoxProps) {
   return (
     <CharacterBoxContainer>
       <img
-        src={memberInfo.characterImageUrl}
-        alt={`${memberInfo.name}의 캐릭터 이미지`}
+        src={memberInfo.character_image}
+        alt={`${memberInfo.character_name}의 캐릭터 이미지`}
       />
       <div>
-        <p>{memberInfo.name}</p>
-        {index === 0 && <p>길드마스터</p>}
-        <p>{memberInfo.nickname}</p>
-        <p>{memberInfo.level}</p>
-        <p>{memberInfo.job}</p>
+        <p>{memberInfo.character_name}</p>
+        <p>{memberInfo.character_level}</p>
+        <p>{memberInfo.character_class}</p>
       </div>
     </CharacterBoxContainer>
   );

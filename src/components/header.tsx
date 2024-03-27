@@ -7,7 +7,8 @@ const StyledHeader = styled.header`
   height: 3.8125rem;
   padding-left: 0.625rem;
   gap: 30px;
-  background-color: #ffb700;
+  /* background-color: #ffb700; */
+  background-color: #b9a032;
 
   img {
     cursor: pointer;
@@ -30,10 +31,10 @@ export default function Header() {
     <StyledHeader>
       <Link to="/">
         <img
-          width="70px"
-          height="61px"
-          src="/public/kodakLogo.svg"
-          alt="Kodak 로고 이미지"
+          width="55px"
+          height="55px"
+          src="/public/DogeLogo.png"
+          alt="Doge 로고 이미지"
         />
       </Link>
 
